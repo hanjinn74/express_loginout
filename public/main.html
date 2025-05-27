@@ -51,10 +51,15 @@
         <h1>로그인 성공</h1>
         <p>환영합니다! 메인 페이지에 오신 것을 환영합니다.</p>
         <a href="/logout">로그아웃</a>
-        <button onclick="location.href='index.html'">로그인 페이지로 이동</button>
+        <button onclick="login_location()">로그인 페이지로 이동</button>
         <button onclick="location.href='signup.html'">회원가입 페이지로 이동</button>
         <button onclick="location.href='pyramid.html'">피라미드 생성기로 이동</button>
         <button onclick="location.href='time.html'">현재 시간 확인</button>
     </div>
+    <script>
+        function login_location() {
+            window.location.href = 'index.html';
+        }
+    </script>
 </body>
 </html>

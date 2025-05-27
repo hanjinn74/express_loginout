@@ -37,7 +37,7 @@
 
             for (let i = 1; i <= rows; i++) {
                 const spaces = ' '.repeat(rows - i);
-                const stars = '*'.repeat(i * 2 - 1);
+                const stars = '^^'.repeat(i * 2 - 1);
                 pyramidDiv.textContent += spaces + stars + '\n';
             }
         }

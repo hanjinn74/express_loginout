@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const express = require('express')
 const app = express()
 const port = 3000
+// path 모듈을 사용하여 파일 경로를 처리합니다.
+const path = require('path');
 
 var mysql      = require('mysql2');
 var connection = mysql.createConnection({
@@ -15,13 +17,15 @@ var connection = mysql.createConnection({
 app.use(session({
     secret: 'mySecretKey123',
     resave:false,
-    saveUninitialized: true
+    saveUninitialized: false
 }))
 // Express 애플리케이션에서 JSON 형태의 요청(request) body를 파싱(parse)하기 위해 사용되는 미들웨어
 app.use(express.json())
 //HTTP POST 요청의 본문(body)에 인코딩된 데이터를 해석하고, req.body 객체에 채워넣어주는 역할을 합니다.
-app.use(express.urlencoded({extended:false}))
 
+app.use(express.static(path.join(__dirname, 'public')));
+// 정적 파일 제공을 위한 미들웨어 추가
+app.use(express.static(path.join(__dirname)));
 
 app.post('/login',(req,res)=>{
     const id = req.body.id
@@ -30,7 +34,7 @@ app.post('/login',(req,res)=>{
 		//아이디를 확인용으로 썼어요.
     connection.connect()
     //id값에 맞게 db에서 pw값을 불러오기
-    connection.query(`SELECT pw FROM hyeok.id_table WHERE id = '${id}'`,(err,rows,fields)=>{
+    connection.query(`SELECT pw FROM hanjin.id_table WHERE id = '${id}'`,(err,rows,fields)=>{
         if(err) throw err;
         //불러온 pw값은 배열과 json으로 저장되어 있기 때문에, 값만 따로 뺄게요
         const db_pw = rows[0].pw
