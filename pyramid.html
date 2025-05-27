@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyramid Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .pyramid {
+            margin-top: 20px;
+            white-space: pre;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>피라미드 생성기</h1>
+    <label for="rows">피라미드 높이 (줄 수):</label>
+    <input type="number" id="rows" min="1" placeholder="숫자를 입력하세요">
+    <button onclick="generatePyramid()">생성</button>
+    <div class="pyramid" id="pyramid"></div>
+
+    <script>
+        function generatePyramid() {
+            const rows = document.getElementById('rows').value;
+            const pyramidDiv = document.getElementById('pyramid');
+            pyramidDiv.innerHTML = '';
+
+            if (rows < 1) {
+                pyramidDiv.textContent = '1 이상의 숫자를 입력하세요.';
+                return;
+            }
+
+            for (let i = 1; i <= rows; i++) {
+                const spaces = ' '.repeat(rows - i);
+                const stars = '*'.repeat(i * 2 - 1);
+                pyramidDiv.textContent += spaces + stars + '\n';
+            }
+        }
+    </script>
+</body>
+</html>

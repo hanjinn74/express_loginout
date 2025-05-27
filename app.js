@@ -39,11 +39,13 @@ app.post('/login',(req,res)=>{
         //동일하면 check가 true가 되요
         const check = bcrypt.compareSync(pw,db_pw)
         if(check){
-		        //true면 '확인'
-            console.log('확인')
-        }else{
-		        //fals면 'x'
-            console.log('x')
+            // 로그인 성공 시 main.html로 리다이렉트
+            res.redirect('/main');
+            console.log('확인');
+        } else {
+            // 로그인 실패 시 처리
+            res.status(401).send('로그인 실패');
+            console.log('x');
         }
     })
     
